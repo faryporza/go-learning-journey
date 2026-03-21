@@ -1,0 +1,11 @@
+../.venv/
+./.venv/
+*.log
+*.tmp
+*.cache
+*.bak
+*.swp
+.DS_Store
+.idea/
+.vscode/
+go-flash-sale-simulation/05-booking-native-go/.venv
