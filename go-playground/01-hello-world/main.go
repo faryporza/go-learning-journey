@@ -6,4 +6,6 @@ import "fmt"
 func main() {
 	fmt.Println("Hello, World!")
 	fmt.Print("Hi hiiiiiiiii")
+
+	lesson1()
 }
