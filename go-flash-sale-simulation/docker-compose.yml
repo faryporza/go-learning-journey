@@ -1,14 +1,29 @@
 version: '3.8'
 
 services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: low-spec-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: flashsale
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'      # ให้ CPU แค่ 20% ของ 1 Core
+          memory: 250M     # ให้ RAM 250MB (MySQL ใช้น้อยกว่านี้มักจะบูทไม่ขึ้น)
+
   redis-db:
     image: redis:alpine
     container_name: low-spec-redis
     ports:
       - "6379:6379"
-    # ทีเด็ดอยู่ตรงนี้! สั่งจำกัดสเปคเครื่อง
     deploy:
       resources:
         limits:
-          cpus: '0.1'       # ให้ใช้ CPU แค่ 10% ของ 1 Core (ช้าสุดๆ)
-          memory: 20M       # ให้ RAM แค่ 20 Megabytes (บีบสุดๆ)
+          cpus: '0.1'      # ให้ CPU แค่ 10%
+          memory: 20M      # ให้ RAM 20MB ก็พอสำหรับ Redis
