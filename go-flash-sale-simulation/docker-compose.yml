@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  redis-db:
+    image: redis:alpine
+    container_name: low-spec-redis
+    ports:
+      - "6379:6379"
+    # ทีเด็ดอยู่ตรงนี้! สั่งจำกัดสเปคเครื่อง
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'       # ให้ใช้ CPU แค่ 10% ของ 1 Core (ช้าสุดๆ)
+          memory: 20M       # ให้ RAM แค่ 20 Megabytes (บีบสุดๆ)
