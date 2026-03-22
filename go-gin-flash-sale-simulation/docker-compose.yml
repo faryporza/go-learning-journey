@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  mysql-db:
+    image: mysql:8.0
+    container_name: prod-spec-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: flashsale
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5' # ให้ CPU ครึ่งคอร์พอ
+          memory: 512M # MySQL ใช้แค่ 512MB ก็พอถูไถรันรอดแล้วครับ
+
+  redis-db:
+    image: redis:alpine
+    container_name: prod-spec-redis
+    ports:
+      - "6379:6379"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 50M # Redis ประหยัดมาก 50MB รับได้เป็นหมื่นคิวครับ
