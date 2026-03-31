@@ -16,5 +16,5 @@ func main() {
 
 	// 3. สตาร์ท Server (Gin มักจะใช้ Port 8080 เป็นค่าเริ่มต้น)
 	fmt.Println("🍸 Gin Server is running on port 8080...")
-	r.Run(":8080")
+	r.Run(":8080") // เริ่มต้น Server ที่ Port 8080
 }
